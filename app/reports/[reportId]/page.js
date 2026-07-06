@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import ActivityLog from "@/components/activity-log";
 import ReportDetail from "@/components/report-detail";
 import {
   fetchActivitiesByReportId,
@@ -54,10 +53,12 @@ export default async function ReportPage({ params }) {
           {pageError}
         </div>
       ) : (
-        <>
-          <ReportDetail report={report} teams={teams} />
-          <ActivityLog activities={activities} />
-        </>
+        <ReportDetail
+          reportId={reportId}
+          initialReport={report}
+          initialTeams={teams}
+          initialActivities={activities}
+        />
       )}
     </main>
   );

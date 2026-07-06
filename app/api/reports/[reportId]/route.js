@@ -16,6 +16,31 @@ function toEntityUrl(entity, id) {
   return new URL(`/${entity}/${encodeURIComponent(id)}`, JSON_SERVER_URL);
 }
 
+async function patchTeamAvailability(teamId, availability) {
+  let response;
+  try {
+    response = await fetch(toEntityUrl("teams", teamId), {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ availability }),
+    });
+  } catch {
+    return {
+      error: errorResponse("Failed to reach json-server while updating team.", 502),
+    };
+  }
+
+  if (!response.ok) {
+    return {
+      error: errorResponse("Failed to update team in json-server.", 502, {
+        upstreamStatus: response.status,
+      }),
+    };
+  }
+
+  return { team: await response.json() };
+}
+
 async function fetchReport(reportId) {
   let response;
   try {
@@ -103,6 +128,8 @@ export async function PATCH(request, { params }) {
   if (reportError) return reportError;
 
   let updatedReport;
+  const previousAssignedTeamId = report.assignedTeamId;
+
   if (assignedTeamId) {
     const { team, error: teamError } = await fetchTeam(assignedTeamId);
     if (teamError) return teamError;
@@ -141,5 +168,31 @@ export async function PATCH(request, { params }) {
     });
   }
 
-  return Response.json(await updateResponse.json());
+  const savedReport = await updateResponse.json();
+
+  if (assignedTeamId) {
+    const { error: assignedTeamUpdateError } = await patchTeamAvailability(
+      assignedTeamId,
+      "Busy",
+    );
+    if (assignedTeamUpdateError) return assignedTeamUpdateError;
+
+    if (previousAssignedTeamId && previousAssignedTeamId !== assignedTeamId) {
+      const { error: previousTeamUpdateError } = await patchTeamAvailability(
+        previousAssignedTeamId,
+        "Available",
+      );
+      if (previousTeamUpdateError) return previousTeamUpdateError;
+    }
+  }
+
+  if (updatedReport.status === "Closed" && previousAssignedTeamId) {
+    const { error: releaseTeamError } = await patchTeamAvailability(
+      previousAssignedTeamId,
+      "Available",
+    );
+    if (releaseTeamError) return releaseTeamError;
+  }
+
+  return Response.json(savedReport);
 }
