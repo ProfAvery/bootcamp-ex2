@@ -1,0 +1,22 @@
+# Customer Notes
+
+- Two users are expected: Field Lead and Dispatcher.
+- The app should use an API because the users are working through the workflow.
+- Needed API behavior:
+  - List reports.
+  - Get one report by ID.
+  - Retrieve the full activity log for a report.
+- Expected report detail API route:
+  - `GET /api/reports/:reportID`
+- Activity log:
+  - Must retrieve the entire list of actions, not just recent actions.
+  - Actions need timestamps.
+- Report statuses:
+  - `New`
+  - `Assigned`
+  - `In Progress`
+  - `Closed`
+- Status movement should be chronological.
+- Use a reducer or reducer-like state transition function to prevent jumping statuses out of order.
+- The report list should load from the server every time.
+- The report list loading behavior should be similar to using `useEffect` in `App.js`.
