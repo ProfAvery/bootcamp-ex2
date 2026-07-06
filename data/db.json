@@ -1,0 +1,140 @@
+{
+  "reports": [
+    {
+      "id": "r1",
+      "title": "Blocked road on Harbor Boulevard",
+      "location": "Harbor Blvd and Chapman Ave",
+      "priority": "High",
+      "status": "New",
+      "description": "A fallen tree is blocking two northbound lanes. Traffic is backing up near the intersection.",
+      "assignedTeamId": null
+    },
+    {
+      "id": "r2",
+      "title": "Injured person near library",
+      "location": "Central Library entrance",
+      "priority": "High",
+      "status": "Assigned",
+      "description": "Caller reports a person with an ankle injury who cannot walk without assistance.",
+      "assignedTeamId": "t1"
+    },
+    {
+      "id": "r3",
+      "title": "Small fire behind restaurant",
+      "location": "Alley behind 5th Street Market",
+      "priority": "High",
+      "status": "In Progress",
+      "description": "Small contained fire reported near dumpsters. Smoke is visible but no building damage reported.",
+      "assignedTeamId": "t2"
+    },
+    {
+      "id": "r4",
+      "title": "Power outage at apartment building",
+      "location": "Cedar Apartments, Building B",
+      "priority": "Medium",
+      "status": "New",
+      "description": "Residents report loss of power in one building. Elevator is not operating.",
+      "assignedTeamId": null
+    },
+    {
+      "id": "r5",
+      "title": "Supply request at shelter",
+      "location": "Community Center Shelter",
+      "priority": "Low",
+      "status": "Closed",
+      "description": "Shelter requested bottled water and blankets. Delivery was completed.",
+      "assignedTeamId": "t3"
+    }
+  ],
+  "teams": [
+    {
+      "id": "t1",
+      "name": "Team Alpha",
+      "availability": "Available"
+    },
+    {
+      "id": "t2",
+      "name": "Team Bravo",
+      "availability": "Busy"
+    },
+    {
+      "id": "t3",
+      "name": "Team Charlie",
+      "availability": "Available"
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1",
+      "reportId": "r1",
+      "type": "report_created",
+      "message": "Report created",
+      "timestamp": "2026-07-05T17:00:00.000Z",
+      "actorRole": "System"
+    },
+    {
+      "id": "a2",
+      "reportId": "r2",
+      "type": "report_created",
+      "message": "Report created",
+      "timestamp": "2026-07-05T17:05:00.000Z",
+      "actorRole": "System"
+    },
+    {
+      "id": "a3",
+      "reportId": "r2",
+      "type": "team_assigned",
+      "message": "Team Alpha assigned",
+      "timestamp": "2026-07-05T17:08:00.000Z",
+      "actorRole": "Dispatcher"
+    },
+    {
+      "id": "a4",
+      "reportId": "r3",
+      "type": "report_created",
+      "message": "Report created",
+      "timestamp": "2026-07-05T17:10:00.000Z",
+      "actorRole": "System"
+    },
+    {
+      "id": "a5",
+      "reportId": "r3",
+      "type": "team_assigned",
+      "message": "Team Bravo assigned",
+      "timestamp": "2026-07-05T17:12:00.000Z",
+      "actorRole": "Dispatcher"
+    },
+    {
+      "id": "a6",
+      "reportId": "r3",
+      "type": "status_changed",
+      "message": "Status changed from Assigned to In Progress",
+      "timestamp": "2026-07-05T17:20:00.000Z",
+      "actorRole": "Field Lead"
+    },
+    {
+      "id": "a7",
+      "reportId": "r4",
+      "type": "report_created",
+      "message": "Report created",
+      "timestamp": "2026-07-05T17:25:00.000Z",
+      "actorRole": "System"
+    },
+    {
+      "id": "a8",
+      "reportId": "r5",
+      "type": "report_created",
+      "message": "Report created",
+      "timestamp": "2026-07-05T16:30:00.000Z",
+      "actorRole": "System"
+    },
+    {
+      "id": "a9",
+      "reportId": "r5",
+      "type": "status_changed",
+      "message": "Status changed to Closed",
+      "timestamp": "2026-07-05T17:30:00.000Z",
+      "actorRole": "Dispatcher"
+    }
+  ]
+}
