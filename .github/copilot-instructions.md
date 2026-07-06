@@ -76,3 +76,9 @@ Implementation must preserve these rules:
 - Keep changes small and reviewable.
 - Do not implement the whole app in one request.
 - Do not change `AGENTS.md` unless explicitly asked.
+
+## Archived documents
+
+Do not read, summarize, cite, or use files under `docs/archive/` as implementation context unless the user explicitly asks about an archived file.
+
+Files in `docs/archive/` are human-readable project history artifacts, not current requirements, implementation plans, or coding guidance.
